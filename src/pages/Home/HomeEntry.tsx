@@ -19,7 +19,7 @@ const HomeEntry = () => {
             <div>
                 Home
             </div>
-        // </Provider> 
+        // </Provider>
         
     )
 }
