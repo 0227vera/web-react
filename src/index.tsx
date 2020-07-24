@@ -10,14 +10,13 @@ import { Router } from 'react-router-dom'
 import { createHistory } from './router/history'
 
 // mobx
-// import { Provider } from 'mobx-react'
-// import BreadcrumbStore from './store/BreadcrumbStore'
-// import container from './store/container'
+import { Provider } from 'mobx-react'
+import BreadcrumbStore from './store/BreadcrumbStore'
 
 // 设置antd全局主题并引入整体样式
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/es/locale/zh_CN'
-import 'antd/dist/antd.less'
+import 'antd/dist/antd.css'
 
 // css in js 的使用设置全局上下文
 import { ThemeProvider } from 'styled-components'
@@ -32,15 +31,16 @@ import App from './App'
 function app () {
     const basename = '/'
     const history = createHistory(basename)
-
     ReactDOM.render(
-        <ThemeProvider theme={theme}>
-            <Router history={history}>
-                <ConfigProvider locale={zhCN}>
-                    <App />
-                </ConfigProvider>
-            </Router>
-        </ThemeProvider>,
+        <Provider {...{ BreadcrumbStore }}>
+            <ThemeProvider theme={theme}>
+                <Router history={history}>
+                    <ConfigProvider locale={zhCN}>
+                        <App />
+                    </ConfigProvider>
+                </Router>
+            </ThemeProvider>
+        </Provider>,
         document.getElementById('root')
     )
 }
